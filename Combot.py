@@ -1,6 +1,6 @@
 # combot.py - Universal Fighting Game Combo Bot Template
 # A Discord bot for managing and displaying fighting game combos
-# GitHub: https://github.com/yourusername/combot
+# GitHub: https://github.com/ENVYFGC/combot
 
 import os
 import json
@@ -23,7 +23,6 @@ from discord.app_commands import Choice
 from discord.ui import View, Button, Modal, TextInput
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-# Note: aiofiles removed for compatibility
 
 # ─── Configuration & Setup ─────────────────────────────────────────────────────
 
