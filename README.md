@@ -9,7 +9,6 @@ A Discord bot for managing and displaying fighting game combos, resources, and p
 - **Notable Players Section** - Showcase top players with social links
 - **Resource Management** - Share guides, spreadsheets, and other resources
 - **Fully Customizable** - Configure for any fighting game character
-- **High Performance** - Includes caching, async operations, and optimized data handling
 
 ## Prerequisites
 
