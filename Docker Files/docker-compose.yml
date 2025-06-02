@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  combot:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: combot
+    restart: unless-stopped
+    
+    # Environment variables from .env file
+    env_file:
+      - .env
+    
+    # Optional: Override environment variables
+    environment:
+      - LOG_LEVEL=INFO
+      - CONFIG_FILENAME=/app/data/character_bot_data.json
+    
+    # Volume for persistent data
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # Resource limits (optional)
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Network (optional, for multiple services)
+    networks:
+      - combot-network
+
+  # Optional: Add a monitoring service
+  # portainer:
+  #   image: portainer/portainer-ce:latest
+  #   container_name: portainer
+  #   restart: unless-stopped
+  #   ports:
+  #     - "9000:9000"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - portainer_data:/data
+  #   networks:
+  #     - combot-network
+
+# Create networks
+networks:
+  combot-network:
+    driver: bridge
+
+# Optional: Create named volumes
+volumes:
+  # portainer_data:
+  combot_data:
+    driver: local
+
+# Example usage:
+# docker-compose up -d          # Start in background
+# docker-compose logs -f        # View logs
+# docker-compose down           # Stop and remove
+# docker-compose restart        # Restart services
+# docker-compose pull && docker-compose up -d  # Update and restart
