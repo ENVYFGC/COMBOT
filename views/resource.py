@@ -325,7 +325,7 @@ class ResourceListView(PaginatedView):
             if self.note:
                 description = f"{self.note}\n\n"
             
-            if not self.resources:
+            if not self.items:
                 description += "_No resources configured yet._"
             else:
                 # List resources on current page
